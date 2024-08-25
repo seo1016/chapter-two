@@ -11,9 +11,9 @@ data class RetrieveMemberResponse (
 ) {
     
     constructor (member: Member) : this (
-        id = member.id!!.value,
-        phoneNum = member.phoneNum.value,
-        name = member.name.value,
+        id = member.id!!,
+        phoneNum = member.phoneNum,
+        name = member.name,
     )
 
 }

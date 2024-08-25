@@ -2,28 +2,27 @@ package com.byebye.chapterTwo.domain.member.application.model
 
 import com.byebye.chapterTwo.domain.member.adapter.`in`.dto.req.EditMemberRequest
 import com.byebye.chapterTwo.domain.member.adapter.`in`.dto.req.RegisterMemberRequest
-import com.byebye.chapterTwo.domain.member.application.model.value.*
 
 data class Member (
 
-    val id: MemberId?,
-    var name: MemberName,
-    val password: MemberPassword,
+    val id: Long?,
+    var name: String,
+    val password: String,
     val role: MemberRole,
-    var phoneNum: MemberPhoneNum
+    var phoneNum: String
 
 ) {
 
     constructor(dto: RegisterMemberRequest, encrypted: String) : this (
-        id = MemberId(0),
-        name = MemberName(dto.name),
-        password = MemberPassword(encrypted),
+        id = null?:0,
+        name = dto.name,
+        password = encrypted,
         role = MemberRole("ROLE_USER"),
-        phoneNum = MemberPhoneNum(dto.phoneNum)
+        phoneNum = dto.phoneNum
     )
 
     fun editMember (dto: EditMemberRequest) {
-        this.name = MemberName(dto.name)
+        this.name = dto.name
     }
 
 }

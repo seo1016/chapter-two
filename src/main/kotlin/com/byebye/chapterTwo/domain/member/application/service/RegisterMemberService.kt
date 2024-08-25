@@ -25,7 +25,7 @@ class RegisterMemberService(
     override fun registerMember(@RequestBody dto: RegisterMemberRequest): BaseResponse<JwtInfo> {
         val member = Member(dto, bCryptPasswordEncoder.encode(dto.password))
 
-        if (existMemberPort.existMemberWithName(member.name.value)) {
+        if (existMemberPort.existMemberWithName(member.name)) {
             throw CustomException(MemberErrorCode.MEMBER_ALREADY_EXIST)
         }
 

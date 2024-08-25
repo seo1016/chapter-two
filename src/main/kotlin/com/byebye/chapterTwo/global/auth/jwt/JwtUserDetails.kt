@@ -1,7 +1,6 @@
 package com.byebye.chapterTwo.global.auth.jwt
 
 import com.byebye.chapterTwo.domain.member.application.model.Member
-import com.byebye.chapterTwo.domain.member.application.model.value.MemberId
 import org.springframework.security.core.GrantedAuthority
 import org.springframework.security.core.authority.SimpleGrantedAuthority
 import org.springframework.security.core.userdetails.UserDetails
@@ -10,7 +9,7 @@ class JwtUserDetails(
     val member: Member
 ) : UserDetails {
 
-    val id: MemberId? = member.id
+    val id: Long? = member.id
 
     override fun getAuthorities(): MutableCollection<out GrantedAuthority> {
         val authorities: MutableCollection<GrantedAuthority> = ArrayList()
@@ -21,11 +20,11 @@ class JwtUserDetails(
     }
 
     override fun getPassword(): String {
-        return member.password.value
+        return member.password
     }
 
     override fun getUsername(): String {
-        return member.name.value
+        return member.name
     }
 
     override fun isAccountNonExpired(): Boolean {

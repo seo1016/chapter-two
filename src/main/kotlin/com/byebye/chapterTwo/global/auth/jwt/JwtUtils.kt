@@ -96,8 +96,8 @@ class JwtUtils(
     private fun createToken(member: Member, tokenExpired: Long): String {
         val now: Long = Date().time
         return Jwts.builder()
-            .claim("id", member.id?.value)
-            .claim("name", member.name.value)
+            .claim("id", member.id)
+            .claim("name", member.name)
             .claim("role", member.role.value)
             .issuedAt(Date(now))
             .expiration(Date(now + tokenExpired))

@@ -15,7 +15,7 @@ class RetrieveMemberService (
 ) : RetrieveMemberUseCase {
 
     override fun retrieveMember(): BaseResponse<RetrieveMemberResponse> {
-        val member: Member = loadMemberPort.loadMemberWithId(jwtUtils.getMember().id!!.value)
+        val member: Member = loadMemberPort.loadMemberWithId(jwtUtils.getMember().id!!)
 
         return BaseResponse (
             message = "멤버 정보 조회 성공 !!",
