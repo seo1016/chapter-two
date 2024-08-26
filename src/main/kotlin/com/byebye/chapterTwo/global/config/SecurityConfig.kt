@@ -48,9 +48,6 @@ class SecurityConfig (
                 it
                     .requestMatchers("/swagger-ui/**", "/v3/**").permitAll()
                     .requestMatchers("/member/**").permitAll()
-                    .requestMatchers("/api/**").permitAll()
-                    .requestMatchers("/bot/chat").permitAll()
-                    .requestMatchers("/community/**").hasAnyRole("USER", "ADMIN")
                     .anyRequest().authenticated()
             }
 
