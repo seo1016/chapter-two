@@ -34,6 +34,15 @@ jobs:
         with:
           java-version: '17'
           distribution: 'temurin'
+      - name: List directory
+        run: |
+          echo "Current directory:"
+          pwd
+          echo "List files:"
+          ls -la
+          echo "List HackerGround directory:"
+          ls -la HackerGround
+
       - name: Run Gradle Build
         working-directory: ./HackerGround
         run: ./gradlew build
