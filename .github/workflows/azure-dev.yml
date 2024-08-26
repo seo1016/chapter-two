@@ -20,6 +20,9 @@ jobs:
       AZURE_RESOURCE_GROUP: ${{ vars.AZURE_RESOURCE_GROUP }}
       AZURE_LOCATION: ${{ vars.AZURE_LOCATION }}
       AZURE_ENV_NAME: ${{ vars.AZURE_ENV_NAME }}
+      DATABASE_URL: ${{ secrets.DB_URL }}
+      DATABASE_USER: ${{ secrets.DB_USERNAME }}
+      DATABASE_PASSWORD: ${{ secrets.DB_PASSWORD }}
 
     steps:
       - name: Checkout
@@ -31,15 +34,6 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
 
-      - name: Set yml file
-        uses: microsoft/variable-substitution@v1
-        with:
-          files: src/main/resources/application.yaml
-        env:
-          spring.datasource.url: ${{ secrets.DB_URL }}
-          spring.datasource.username: ${{ secrets.DB_USERNAME }}
-          spring.datasource.password: ${{ secrets.DB_PASSWORD }}
-
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
 
@@ -49,7 +43,10 @@ jobs:
       - name: Docker build
         run: |
           echo ${{ secrets.DOCKER_PASSWORD }} | docker login -u ${{ secrets.DOCKER_USERNAME }} --password-stdin
-          docker build -t ${{ secrets.DOCKER_USERNAME }}/uiseong-come-on .
+          docker build -t ${{ secrets.DOCKER_USERNAME }}/uiseong-come-on \
+            --build-arg DATABASE_URL=${{ secrets.DB_URL }} \
+            --build-arg DATABASE_USER=${{ secrets.DB_USERNAME }} \
+            --build-arg DATABASE_PASSWORD=${{ secrets.DB_PASSWORD }} .
           docker push ${{ secrets.DOCKER_USERNAME }}/uiseong-come-on:latest
 
       - name: Install azd
@@ -58,10 +55,11 @@ jobs:
       - name: Log in with Azure (Federated Credentials)
         if: ${{ env.AZURE_CLIENT_ID != '' }}
         run: |
-          azd auth login \
-            --client-id "${{ env.AZURE_CLIENT_ID }}" \
-            --federated-credential-provider "github" \
-            --tenant-id "${{ env.AZURE_TENANT_ID }}"
+          azd auth login `
+            --client-id "$Env:AZURE_CLIENT_ID" `
+            --federated-credential-provider "github" `
+            --tenant-id "$Env:AZURE_TENANT_ID"
+        shell: pwsh
 
       - name: Log in with Azure (Client Credentials)
         if: ${{ env.AZURE_CREDENTIALS != '' }}
