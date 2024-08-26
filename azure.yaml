@@ -1,10 +1,8 @@
-# yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-dev/main/schemas/v1.0/azure.yaml.json
-
 name: HackerGround
 metadata:
-    template: azd-init@1.9.5
+template: azd-init@1.9.5
 services:
-    HackerGround:
-        project: .
-        host: containerapp
-        language: java
+HackerGround:
+project: .
+host: containerapp
+language: java 
