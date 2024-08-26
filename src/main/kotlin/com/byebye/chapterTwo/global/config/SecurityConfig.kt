@@ -51,7 +51,8 @@ class SecurityConfig (
                     .requestMatchers("/api/**").permitAll()
                     .requestMatchers("/bot/chat").permitAll()
                     .requestMatchers("/community/**").hasAnyRole("USER", "ADMIN")
-                    .anyRequest().authenticated()
+                    .requestMatchers("/").permitAll()
+                    .anyRequest().permitAll()
             }
 
             .addFilterBefore(JwtAuthenticationFilter(jwtUtils, objectMapper), UsernamePasswordAuthenticationFilter::class.java)

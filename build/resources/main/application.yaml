@@ -18,6 +18,3 @@ spring:
       ddl-auto: update
 
     show-sql: true
-
-  thymeleaf:
-    cache: false  # 템플릿 캐싱을 끄려면
