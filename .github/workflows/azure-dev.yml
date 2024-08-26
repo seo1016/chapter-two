@@ -36,7 +36,7 @@ jobs:
           distribution: 'temurin'
       - name: Build with Gradle
         run: |
-          cd src
+          cd HackerGround
           ./gradlew build -x test
 
       - name: Log in with Azure (Federated Credentials)
