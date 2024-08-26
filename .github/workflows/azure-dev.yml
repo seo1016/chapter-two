@@ -34,10 +34,9 @@ jobs:
         with:
           java-version: '17'
           distribution: 'temurin'
-      - name: Build with Gradle
-        run: |
-          cd ..
-          ./gradlew build -x test
+      - name: Run Gradle Build
+        working-directory: ./HackerGround
+        run: ./gradlew build
 
       - name: Log in with Azure (Federated Credentials)
         if: ${{ env.AZURE_CLIENT_ID != '' }}
