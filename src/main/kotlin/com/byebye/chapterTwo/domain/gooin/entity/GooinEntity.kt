@@ -15,5 +15,5 @@ class GooinEntity (
 
     var description: String = "",
 
-    var userId: Long,
+    var userName: String,
 )

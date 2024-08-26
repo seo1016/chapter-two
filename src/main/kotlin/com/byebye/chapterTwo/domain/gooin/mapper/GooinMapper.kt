@@ -11,7 +11,7 @@ class GooinMapper {
             id = entity.id!!,
             title = entity.title,
             description = entity.description,
-            userId = entity.userId
+            userName = entity.userName
         )
     }
 
@@ -20,7 +20,7 @@ class GooinMapper {
             id = domain.id?: 0,
             title = domain.title,
             description = domain.description,
-            userId = domain.userId
+            userName = domain.userName
         )
     }
 }

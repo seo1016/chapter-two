@@ -6,13 +6,13 @@ data class Gooin(
     val id: Long? = null,
     var title: String,
     var description: String,
-    val userId: Long,
+    val userName: String,
 ){
-    constructor(dto: AddGooinRequest, userId: Long) : this(
+    constructor(dto: AddGooinRequest, userName: String) : this(
         id = null?:0,
         title = dto.title,
         description = dto.description,
-        userId = userId
+        userName = userName,
     )
 
     fun editGooin(dto: AddGooinRequest){
