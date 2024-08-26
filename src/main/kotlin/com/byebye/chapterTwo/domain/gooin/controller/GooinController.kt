@@ -4,12 +4,7 @@ import com.byebye.chapterTwo.domain.gooin.dto.req.AddGooinRequest
 import com.byebye.chapterTwo.domain.gooin.entity.GooinEntity
 import com.byebye.chapterTwo.domain.gooin.service.GooinService
 import com.byebye.chapterTwo.global.common.BaseResponse
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.PatchMapping
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.RequestBody
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.*
 
 @RestController
 @RequestMapping("/gooin")
@@ -29,6 +24,11 @@ class GooinController(
     @PatchMapping("/{id}")
     fun editGooin(id:Long, dto:AddGooinRequest): BaseResponse<String> {
         return gooinService.editGooin(id,dto)
+    }
+
+    @GetMapping("/{id}")
+    fun getGooin(@PathVariable id:Long):BaseResponse<GooinEntity> {
+        return gooinService.getDetail(id)
     }
 
 }

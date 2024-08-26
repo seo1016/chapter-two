@@ -1,4 +1,4 @@
-package com.byebye.chapterTwo.domain.exception
+package com.byebye.chapterTwo.domain.gooin.exception
 
 import com.byebye.chapterTwo.global.auth.exception.CustomErrorCode
 import org.springframework.http.HttpStatus

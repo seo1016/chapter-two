@@ -1,12 +1,11 @@
 package com.byebye.chapterTwo.domain.gooin.service
 
-import com.byebye.chapterTwo.domain.exception.GooinErrorCode
+import com.byebye.chapterTwo.domain.gooin.exception.GooinErrorCode
 import com.byebye.chapterTwo.domain.gooin.dto.Gooin
 import com.byebye.chapterTwo.domain.gooin.dto.req.AddGooinRequest
 import com.byebye.chapterTwo.domain.gooin.entity.GooinEntity
 import com.byebye.chapterTwo.domain.gooin.mapper.GooinMapper
 import com.byebye.chapterTwo.domain.gooin.repository.GooinRepository
-import com.byebye.chapterTwo.global.auth.exception.CustomErrorCode
 import com.byebye.chapterTwo.global.auth.exception.CustomException
 import com.byebye.chapterTwo.global.auth.jwt.JwtUtils
 import com.byebye.chapterTwo.global.common.BaseResponse
@@ -49,6 +48,13 @@ class GooinService(
         gooinRepository.save(gooinMapper.toEntity(gooin))
         return BaseResponse(
             message = "수정 성공"
+        )
+    }
+
+    fun getDetail(id:Long):BaseResponse<GooinEntity>{
+        return BaseResponse(
+            message = "조회 성공",
+            data = gooinRepository.findById(id).orElseThrow { CustomException(GooinErrorCode.GOOIN_NOT_FOUND) }
         )
     }
 
