@@ -34,6 +34,10 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
 
+      - name: yaml file setting
+        run: |
+          echo "${{ secrets.APPLICATION_YAML }}" > ./src/main/resources/application.yaml
+
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
 
@@ -43,10 +47,7 @@ jobs:
       - name: Docker build
         run: |
           echo ${{ secrets.DOCKER_PASSWORD }} | docker login -u ${{ secrets.DOCKER_USERNAME }} --password-stdin
-          docker build -t ${{ secrets.DOCKER_USERNAME }}/uiseong-come-on \
-            --build-arg DATABASE_URL=${{ secrets.DB_URL }} \
-            --build-arg DATABASE_USER=${{ secrets.DB_USERNAME }} \
-            --build-arg DATABASE_PASSWORD=${{ secrets.DB_PASSWORD }} .
+          docker build -t ${{ secrets.DOCKER_USERNAME }}/uiseong-come-on .
           docker push ${{ secrets.DOCKER_USERNAME }}/uiseong-come-on:latest
 
       - name: Install azd
