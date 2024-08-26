@@ -1,5 +1,5 @@
 FROM openjdk:latest
 
-COPY build/libs/chapterTwo-0.0.1-SNAPSHOT.jar /app/app.jar
+COPY ../build/libs/chapterTwo-0.0.1-SNAPSHOT.jar /app/app.jar
 
 ENTRYPOINT ["java", "-jar", "/app/app.jar"]

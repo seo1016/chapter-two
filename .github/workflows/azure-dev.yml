@@ -44,7 +44,6 @@ jobs:
           ls -la HackerGround
 
       - name: Run Gradle Build
-        working-directory: ./HackerGround
         run: ./gradlew build
 
       - name: Log in with Azure (Federated Credentials)
