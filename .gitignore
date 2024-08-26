@@ -440,3 +440,4 @@ out/
 .kotlin
 
 application.yml
+.azure
